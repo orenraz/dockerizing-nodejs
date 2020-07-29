@@ -1,0 +1,24 @@
+build docker: docker build -t addressbook .
+run the container : docker run -it -p 3000:3000 addressbook
+
+Run the migration script inside the container. This will build the Docker image, create a persistent volume for the data, and create the table:
+docker-compose run addressbook npm run migrate
+
+start Docker Compose: docker-compose up
+
+run tests (new terminal while docker is up) : docker-compose run addressbook npm test
+
+
+http://localhost:3000
+http://localhost:3000/persons/all
+
+
+
+
+testing
+------------
+We can use curl to test the endpoints :
+$ curl -w "\n" \
+       -X PUT \
+       -d "firstName=Bobbie&lastName=Draper" \
+       localhost:3000/persons
